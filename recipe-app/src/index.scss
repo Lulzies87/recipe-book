@@ -1,0 +1,32 @@
+:root {
+  color-scheme: light dark;
+  --background-color: black;
+  --text-primary-color: white;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background-color: white;
+    --text-primary-color: black;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  font-size: calc(1rem + 0.5vw);
+  line-height: 1.6;
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+}
