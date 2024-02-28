@@ -1,6 +1,8 @@
+import styles from "./Recipes.module.scss"
+
 export function Recipes() {
 
     return (
-        <h2 style={{ backgroundColor: "yellow" }}>Recipes</h2>
+        <h2 className={styles.recipes}>Recipes</h2>
     )
 }
