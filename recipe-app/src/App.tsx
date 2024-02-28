@@ -1,9 +1,15 @@
+import { Header } from "./Header";
+import { Recipes } from "./Recipes";
+import { SideBar } from "./SideBar";
 import "./App.scss";
 
 function App() {
-
   return (
-  <h1>Hello</h1>
+    <main>
+      <Header />
+      <SideBar />
+      <Recipes />
+    </main>
   );
 }
 
