@@ -18,3 +18,8 @@ Recipes
 Pantry
 - id?
 - name, quantity
+
+## Screens
+- List recipes (main screen)
+- Recipe details
+- Profile page?
