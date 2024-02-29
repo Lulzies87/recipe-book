@@ -10,17 +10,23 @@ const app = express();
 app.use(cors());
 app.use(json());
 
-// app.get("/api", (req, res) => {
-//   const endPoint = "https://api.spoonacular.com/recipes/716429/information";
-//   const data = axios
-//     .get(endPoint, {
-//       headers: { "x-api-key": "bfb6e89cee30484eaa6d65fd8f327a86" },
-//     })
-//     .then((response) => console.log(response.data));
+interface Recipe {
+  id: string;
+}
 
-//   res.status(200);
-//   res.send(data);
-// });
+app.get("/api", async (_, res) => {
+  const endPoint = "https://api.spoonacular.com/recipes/716429/information";
+
+  try {
+    const response = await axios.get(endPoint, {
+      headers: { "x-api-key": "bfb6e89cee30484eaa6d65fd8f327a86" },
+    });
+    res.status(200).send(response.data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).send("Error fetching data");
+  }
+});
 
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
