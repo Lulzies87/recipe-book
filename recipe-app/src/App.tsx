@@ -1,15 +1,11 @@
-import { Header } from "./Header";
-import { Recipes } from "./Recipes";
-import { SideBar } from "./SideBar";
-import "./App.scss";
+import { Outlet } from "react-router";
+import styles from "./App.module.scss";
 
 function App() {
   return (
-    <main>
-      <Header />
-      <SideBar />
-      <Recipes />
-    </main>
+    <>
+      <Outlet />
+    </>
   );
 }
 

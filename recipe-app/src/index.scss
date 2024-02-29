@@ -2,12 +2,16 @@
   color-scheme: light dark;
   --background-color: black;
   --text-primary-color: white;
+  --text-secondary-color: #bcafff;
+  --hover-color: #ffffff33;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     --background-color: white;
     --text-primary-color: black;
+    --text-secondary-color: #1b00a1;
+    --hover-color: #0000001a;
   }
 }
 
