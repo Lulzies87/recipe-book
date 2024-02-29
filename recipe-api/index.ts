@@ -10,12 +10,8 @@ const app = express();
 app.use(cors());
 app.use(json());
 
-interface Recipe {
-  id: string;
-}
-
 app.get("/api", async (_, res) => {
-  const endPoint = "https://api.spoonacular.com/recipes/716429/information";
+  const endPoint = "https://api.spoonacular.com/recipes/random?number=100";
 
   try {
     const response = await axios.get(endPoint, {
