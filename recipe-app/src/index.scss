@@ -1,34 +1,23 @@
 :root {
-  --primary-angle: 229deg;
-  
-  --body-bg-light: hsl(var(--primary-angle) 20% 98%);
-  --body-bg-dark: hsl(var(--primary-angle) 20% 15%);
-  --body-bg: var(--body-bg-dark);
+  color-scheme: light dark;
+  --background-color: black;
+  --text-primary-color: white;
+  --text-secondary-color: #bcafff;
+  --hover-color: #ffffff33;
+}
 
-  --surface-color-light: hsl(var(--primary-angle) 20% 93%);
-  --surface-color-dark: hsl(var(--primary-angle) 20% 25%);
-  --surface-color: var(--surface-color-dark);
-  
-  --copy-color-light: hsl(var(--primary-angle) 20% 35%);
-  --copy-color-dark: hsl(var(--primary-angle) 20% 85%);
-  --copy-color: var(--copy-color-dark);
-
-  --heading-color-light: hsl(var(--primary-angle) 20% 15%);
-  --heading-color-dark: white;
-  --heading-color: var(--heading-color-dark);
-
-  --primary: hsl(var(--primary-angle) 40% 50%);
-  --primary-dark: hsl(var(--primary-angle) 40% 40%);
-
-  @media (prefers-color-scheme: light) {
-    --body-bg: var(--body-bg-light);
-    --surface-color: var(--surface-color-light);
-    --copy-color: var(--copy-color-light);
-    --heading-color: var(--heading-color-light);
+@media (prefers-color-scheme: light) {
+  :root {
+    --background-color: white;
+    --text-primary-color: black;
+    --text-secondary-color: #1b00a1;
+    --hover-color: #0000001a;
   }
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -39,44 +28,9 @@
 html {
   font-size: calc(1rem + 0.5vw);
   line-height: 1.6;
-  color-scheme: light dark;
+  height: 100%;
 }
 
 body {
   font-family: system-ui, sans-serif;
-  background: var(--body-bg);
-  color: var(--copy-color);
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: var(--heading-color);
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: -0.0625rem;
-}
-
-h6, h5, h4 {
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-h3 {
-  font-size: 1.4rem;
-  font-weight: 700;
-}
-
-h2 {
-  font-size: 1.6rem;
-  font-weight: 800
-}
-
-h1 {
-  font-size: 1.8rem;
-  font-weight: 900;
-}
-
-input, button, textarea, select {
-  font-size: inherit;
-  font-family: inherit;
 }
