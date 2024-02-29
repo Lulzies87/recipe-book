@@ -1,7 +1,45 @@
 .sideBar {
     background-color: var(--background-color);
     height: 100%;
-    box-shadow: 0px 10px 12px -2px var(--text-primary-color);   
+    box-shadow: 0px 10px 12px -2px var(--text-primary-color);
     margin-inline-end: .5rem;
-    padding-inline: 1rem;
+    padding: 0;
+
+    &__details {
+        margin-inline-start: .5rem;
+        position: relative;
+        line-height: 2rem;
+        text-transform: capitalize;
+        user-select: none;
+        cursor: pointer;
+
+        &::before {
+            content: "-";
+            position: absolute;
+            left: -1ch;
+            font-weight: 600;
+        }
+    }
+}
+
+.filters {
+    padding: 0;
+    text-wrap: balance;
+    font-size: calc(.5rem + 1vw);
+    list-style: none;
+
+    &__listItem {
+        border-right: 3px solid transparent;
+        transition: all 200ms ease;
+
+        &:hover {
+            background-color: var(--hover-color);
+            border-right: 3px solid var(--text-primary-color);
+            box-shadow: 0px 4px 12px -2px var(--hover-color);
+        }
+    }
+}
+
+details>summary {
+    list-style: none;
 }
