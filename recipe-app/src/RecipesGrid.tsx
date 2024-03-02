@@ -6,10 +6,10 @@ type Props = { recipes: Recipe[] };
 
 export function RecipesGrid({ recipes }: Props) {
   return (
-    <article className={styles.recipesGrid}>
+    <ul className={styles.recipesGrid}>
       {recipes.map((recipe) => (
-        <RecipeCard recipe={recipe} />
+        <RecipeCard key={recipe.id} recipe={recipe} />
       ))}
-    </article>
+    </ul>
   );
 }

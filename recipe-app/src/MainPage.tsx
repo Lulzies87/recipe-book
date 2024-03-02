@@ -7,7 +7,6 @@ import { Recipe } from "./Recipe.model";
 
 export function MainPage() {
   const recipes = useLoaderData() as Recipe[];
-  console.log(recipes);
 
   return (
     <>

@@ -3,4 +3,6 @@
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(3, 15rem);
     grid-auto-flow: row;
+    list-style: none;
+    padding: 0;
 }
