@@ -4,7 +4,3 @@ export interface Recipe {
   image: string;
   readyInMinutes: number;
 }
-
-export type Recipes = {
-  recipes: Recipe[];
-};
