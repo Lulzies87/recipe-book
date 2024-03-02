@@ -5,7 +5,7 @@ type Props = { recipe: Recipe };
 
 export function RecipeCard({ recipe }: Props) {
   return (
-    <article className={styles.recipeCard}>
+    <li className={styles.recipeCard}>
       <img
         className={styles.recipeImage}
         src={recipe.image}
@@ -17,6 +17,6 @@ export function RecipeCard({ recipe }: Props) {
         <span>{recipe.readyInMinutes}</span>
         <span>Like</span>
       </div>
-    </article>
+    </li>
   );
 }
