@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./SideBar.module.scss";
 
 interface Props {
@@ -5,6 +6,8 @@ interface Props {
 }
 
 export default function SideBar({ handleInput }: Props) {
+  const [minutes, setMinutes] = useState(75);
+
   return (
     <menu className={styles.sideBar}>
       <form
@@ -44,6 +47,22 @@ export default function SideBar({ handleInput }: Props) {
               <label htmlFor="dairyFree">Dairy Free</label>
             </div>
           </details>
+        </li>
+        <li className={styles.filters__slider}>
+          <label htmlFor="duration">Cooking Time</label>
+          <div className={styles.filters__slider__items}>
+            <input
+              type="range"
+              min="1"
+              max="210"
+              step="1"
+              onChange={(e) => {
+                const value = Number(e.target.value);
+                setMinutes(value);
+              }}
+            />
+            <span>{minutes}min</span>
+          </div>
         </li>
       </ul>
     </menu>

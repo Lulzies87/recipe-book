@@ -7,7 +7,6 @@
     padding: 0;
 
     &__details {
-        margin-inline-start: .5rem;
         position: relative;
         line-height: 2rem;
         text-transform: capitalize;
@@ -19,15 +18,16 @@
             position: absolute;
             left: -1ch;
             font-weight: 600;
-            color: var(--text-secondary-color);
         }
     }
 }
 
 .filters {
+    margin-inline-start: .5rem;
     padding: 0;
     text-wrap: balance;
     font-size: calc(0.5rem + 0.5vw);
+    color: var(--text-secondary-color);
 
     &__listItem {
         border-right: 3px solid transparent;
@@ -37,6 +37,22 @@
             background-color: var(--hover-color);
             border-right: 3px solid var(--text-secondary-color);
             box-shadow: 0px 4px 12px -2px var(--hover-color);
+        }
+    }
+
+    &__slider {
+        label {
+            display: block;
+        }
+
+        span {
+            font-size: 0.6rem;
+        }
+
+        &__items {
+            display: flex;
+            gap: 0.2rem;
+            justify-content: center;
         }
     }
 }
