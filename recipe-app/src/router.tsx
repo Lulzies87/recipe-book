@@ -43,30 +43,6 @@ export const router = createBrowserRouter([
         path: "/login",
         Component: LoginPage,
       },
-      {
-        path: "/:search",
-        Component: MainPage,
-        async loader({ params }) {
-          const response = await server.get<{
-            results: {
-              id: string;
-              title: string;
-              image: string;
-              readyInMinutes: number;
-            }[];
-          }>(`/${params.search}`);
-
-          const recipes: Recipe[] = response.data.results.map(
-            ({ id, title, image, readyInMinutes }) => ({
-              id,
-              title,
-              image,
-              readyInMinutes,
-            })
-          );
-          return recipes;
-        },
-      },
     ],
   },
 ]);

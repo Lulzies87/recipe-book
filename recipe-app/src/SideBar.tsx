@@ -2,10 +2,11 @@ import { useState } from "react";
 import styles from "./SideBar.module.scss";
 
 interface Props {
-  handleInput: (query: FormDataEntryValue | null) => void;
+  handleSearch: (query: FormDataEntryValue | null) => void;
+  handleRange: (range: number) => void;
 }
 
-export default function SideBar({ handleInput }: Props) {
+export default function SideBar({ handleSearch, handleRange }: Props) {
   const [minutes, setMinutes] = useState(75);
 
   return (
@@ -16,7 +17,7 @@ export default function SideBar({ handleInput }: Props) {
 
           const formData = new FormData(e.currentTarget);
           const query = formData.get("search-recipe");
-          handleInput(query);
+          handleSearch(query);
         }}
       >
         <input
@@ -59,6 +60,9 @@ export default function SideBar({ handleInput }: Props) {
               onChange={(e) => {
                 const value = Number(e.target.value);
                 setMinutes(value);
+              }}
+              onClickCapture={() => {
+                handleRange(minutes);
               }}
             />
             <span>{minutes}min</span>
