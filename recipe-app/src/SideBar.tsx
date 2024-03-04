@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./SideBar.module.scss";
 
 interface Props {
@@ -5,6 +6,8 @@ interface Props {
 }
 
 export default function SideBar({ handleInput }: Props) {
+  const [minutes, setMinutes] = useState(75);
+
   return (
     <menu className={styles.sideBar}>
       <form
@@ -26,39 +29,40 @@ export default function SideBar({ handleInput }: Props) {
       <ul className={styles.filters}>
         <li className={styles.filters__listItem}>
           <details className={styles.sideBar__details}>
-            Lorem ipsum
-            <summary>this</summary>
+            <summary>Categories</summary>
+            <div className={styles.checkbox}>
+              <input type="checkbox" id="vegeterian" name="vegeterian" />
+              <label htmlFor="vegeterian">Vegeterian</label>
+            </div>
+            <div className={styles.checkbox}>
+              <input type="checkbox" id="vegan" name="vegan" />
+              <label htmlFor="vegan">Vegan</label>
+            </div>
+            <div className={styles.checkbox}>
+              <input type="checkbox" id="glutenFree" name="glutenFree" />
+              <label htmlFor="glutenFree">Gluten Free</label>
+            </div>
+            <div className={styles.checkbox}>
+              <input type="checkbox" id="dairyFree" name="dairyFree" />
+              <label htmlFor="dairyFree">Dairy Free</label>
+            </div>
           </details>
         </li>
-        <li className={styles.filters__listItem}>
-          <details className={styles.sideBar__details}>
-            dolor sit amet consectetur adipisicing elit
-            <summary>that</summary>
-          </details>
-        </li>
-        <li className={styles.filters__listItem}>
-          <details className={styles.sideBar__details}>
-            Aspernatur, deleniti
-            <summary>and this</summary>
-          </details>
-        </li>
-        <li className={styles.filters__listItem}>
-          <details className={styles.sideBar__details}>
-            Lorem ipsum
-            <summary>this</summary>
-          </details>
-        </li>
-        <li className={styles.filters__listItem}>
-          <details className={styles.sideBar__details}>
-            dolor sit amet consectetur adipisicing elit
-            <summary>that</summary>
-          </details>
-        </li>
-        <li className={styles.filters__listItem}>
-          <details className={styles.sideBar__details}>
-            Aspernatur, deleniti
-            <summary>and this</summary>
-          </details>
+        <li className={styles.filters__slider}>
+          <label htmlFor="duration">Cooking Time</label>
+          <div className={styles.filters__slider__items}>
+            <input
+              type="range"
+              min="1"
+              max="210"
+              step="1"
+              onChange={(e) => {
+                const value = Number(e.target.value);
+                setMinutes(value);
+              }}
+            />
+            <span>{minutes}min</span>
+          </div>
         </li>
       </ul>
     </menu>
