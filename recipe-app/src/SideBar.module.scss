@@ -16,7 +16,6 @@
         color: var(--text-primary-color);
 
         &::before {
-            content: "-";
             position: absolute;
             left: -1ch;
             font-weight: 600;
@@ -28,8 +27,7 @@
 .filters {
     padding: 0;
     text-wrap: balance;
-    font-size: calc(.5rem + 1vw);
-    list-style: none;
+    font-size: calc(0.5rem + 0.5vw);
 
     &__listItem {
         border-right: 3px solid transparent;
@@ -64,4 +62,12 @@ details>summary {
     margin: 0.2rem;
     padding-left: 1.1rem;
     width: calc(100% - 0.5rem);
+}
+
+.checkbox {
+    display: flex;
+    gap: 0.4rem;
+    margin-left: 1rem;
+    color: var(--text-secondary-color);
+    font-size: calc(0.4rem + 0.5vw);
 }

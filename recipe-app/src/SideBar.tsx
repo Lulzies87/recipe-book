@@ -26,38 +26,23 @@ export default function SideBar({ handleInput }: Props) {
       <ul className={styles.filters}>
         <li className={styles.filters__listItem}>
           <details className={styles.sideBar__details}>
-            Lorem ipsum
-            <summary>this</summary>
-          </details>
-        </li>
-        <li className={styles.filters__listItem}>
-          <details className={styles.sideBar__details}>
-            dolor sit amet consectetur adipisicing elit
-            <summary>that</summary>
-          </details>
-        </li>
-        <li className={styles.filters__listItem}>
-          <details className={styles.sideBar__details}>
-            Aspernatur, deleniti
-            <summary>and this</summary>
-          </details>
-        </li>
-        <li className={styles.filters__listItem}>
-          <details className={styles.sideBar__details}>
-            Lorem ipsum
-            <summary>this</summary>
-          </details>
-        </li>
-        <li className={styles.filters__listItem}>
-          <details className={styles.sideBar__details}>
-            dolor sit amet consectetur adipisicing elit
-            <summary>that</summary>
-          </details>
-        </li>
-        <li className={styles.filters__listItem}>
-          <details className={styles.sideBar__details}>
-            Aspernatur, deleniti
-            <summary>and this</summary>
+            <summary>Categories</summary>
+            <div className={styles.checkbox}>
+              <input type="checkbox" id="vegeterian" name="vegeterian" />
+              <label htmlFor="vegeterian">Vegeterian</label>
+            </div>
+            <div className={styles.checkbox}>
+              <input type="checkbox" id="vegan" name="vegan" />
+              <label htmlFor="vegan">Vegan</label>
+            </div>
+            <div className={styles.checkbox}>
+              <input type="checkbox" id="glutenFree" name="glutenFree" />
+              <label htmlFor="glutenFree">Gluten Free</label>
+            </div>
+            <div className={styles.checkbox}>
+              <input type="checkbox" id="dairyFree" name="dairyFree" />
+              <label htmlFor="dairyFree">Dairy Free</label>
+            </div>
           </details>
         </li>
       </ul>
