@@ -26,7 +26,7 @@ export function MainPage() {
   return (
     <>
       <Header />
-      <SideBar searchInput={handleSearchInput} />
+      <SideBar handleInput={handleSearchInput} />
       <RecipesGrid recipes={recipes} />
     </>
   );

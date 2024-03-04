@@ -1,10 +1,10 @@
 import styles from "./SideBar.module.scss";
 
 interface Props {
-  searchInput: (query: FormDataEntryValue | null) => void;
+  handleInput: (query: FormDataEntryValue | null) => void;
 }
 
-export default function SideBar({ searchInput }: Props) {
+export default function SideBar({ handleInput }: Props) {
   return (
     <menu className={styles.sideBar}>
       <form
@@ -13,7 +13,7 @@ export default function SideBar({ searchInput }: Props) {
 
           const formData = new FormData(e.currentTarget);
           const query = formData.get("search-recipe");
-          searchInput(query);
+          handleInput(query);
         }}
       >
         <input
