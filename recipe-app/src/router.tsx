@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
               image: string;
               readyInMinutes: number;
             }[];
-          }>("http://localhost:3000/api");
+          }>("http://localhost:3000/");
 
           const recipes: Recipe[] = response.data.recipes.map(
             ({ id, title, image, readyInMinutes }) => ({
@@ -38,6 +38,30 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         Component: LoginPage,
+      },
+      {
+        path: "/:search",
+        Component: MainPage,
+        async loader({ params }) {
+          const response = await axios.get<{
+            results: {
+              id: string;
+              title: string;
+              image: string;
+              readyInMinutes: number;
+            }[];
+          }>(`http://localhost:3000/${params.search}`);
+
+          const recipes: Recipe[] = response.data.results.map(
+            ({ id, title, image, readyInMinutes }) => ({
+              id,
+              title,
+              image,
+              readyInMinutes,
+            })
+          );
+          return recipes;
+        },
       },
     ],
   },

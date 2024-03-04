@@ -10,16 +10,31 @@ const app = express();
 app.use(cors());
 app.use(json());
 
-app.get("/api", async (_, res) => {
-  const endPoint = "https://api.spoonacular.com/recipes/random?number=100";
+const apiClient = axios.create({
+  baseURL: "https://api.spoonacular.com/recipes",
+  headers: { "x-api-key": process.env.API_KEY },
+});
 
+app.get("/", async (_, res) => {
   try {
-    const response = await axios.get(endPoint, {
-      headers: { "x-api-key": "bfb6e89cee30484eaa6d65fd8f327a86" },
+    const response = await apiClient.get("/random", {
+      params: { number: "100" },
     });
     res.status(200).send(response.data);
-  } catch (error) {
-    console.error("Error fetching data:", error);
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    res.status(500).send("Error fetching data");
+  }
+});
+
+app.get("/:search", async (req, res) => {
+  try {
+    const response = await apiClient.get("/complexSearch", {
+      params: { query: `${req.params.search}` },
+    });
+    res.status(200).send(response.data);
+  } catch (err) {
+    console.error("Error fetching data:", err);
     res.status(500).send("Error fetching data");
   }
 });
