@@ -23,10 +23,21 @@ export function MainPage() {
     }
   };
 
+  const handleSelectedRange = async (range: number) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/maxCookingTime/${range}`
+      );
+      setRecipes(response.data.results);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <>
       <Header />
-      <SideBar handleInput={handleSearchInput} />
+      <SideBar handleSearch={handleSearchInput} handleRange={handleSelectedRange} />
       <RecipesGrid recipes={recipes} />
     </>
   );

@@ -39,6 +39,18 @@ app.get("/:search", async (req, res) => {
   }
 });
 
+app.get("/maxCookingTime/:range", async (req, res) => {
+  try {
+    const response = await apiClient.get("/complexSearch", {
+      params: { maxReadyTime: req.params.range },
+    });
+    res.status(200).send(response.data);
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    res.status(500).send("Error fetching data");
+  }
+});
+
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
 
