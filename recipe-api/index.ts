@@ -30,7 +30,7 @@ app.get("/", async (_, res) => {
 app.get("/:search", async (req, res) => {
   try {
     const response = await apiClient.get("/complexSearch", {
-      params: { query: `${req.params.search}` },
+      params: { query: `${req.params.search}`, number: "100" },
     });
     res.status(200).send(response.data);
   } catch (err) {
@@ -42,7 +42,7 @@ app.get("/:search", async (req, res) => {
 app.get("/maxCookingTime/:range", async (req, res) => {
   try {
     const response = await apiClient.get("/complexSearch", {
-      params: { maxReadyTime: req.params.range },
+      params: { maxReadyTime: req.params.range, number: "100" },
     });
     res.status(200).send(response.data);
   } catch (err) {
