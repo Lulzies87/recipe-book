@@ -1,12 +1,11 @@
 import { useLoaderData } from "react-router";
 import { Header } from "./Header";
 import SideBar from "./SideBar";
-import styles from "./MainPage.module.scss";
 import { RecipesGrid } from "./RecipesGrid";
 import { Recipe } from "./Recipe.model";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useSearchParams } from "react-router-dom";
+import styles from "./MainPage.module.scss";
 
 export function MainPage() {
   const [recipes, setRecipes] = useState(useLoaderData() as Recipe[]);
@@ -21,22 +20,21 @@ export function MainPage() {
       setRecipes(filteredRecipes);
     }
   }, [searchParams]);
-
-  const handleSelectedRange = async (range: number) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:3000/maxCookingTime/${range}`
+  
+  useEffect(() => {
+    const value = searchParams.get("maxCookingTime");
+    if (value) {
+      const filteredRecipes = recipes.filter((recipe) =>
+        recipe.readyInMinutes <= Number(value)
       );
-      setRecipes(response.data.results);
-    } catch (err) {
-      console.error(err);
+      setRecipes(filteredRecipes);
     }
-  };
+  }, [searchParams]);
 
   return (
     <>
       <Header />
-      <SideBar handleRange={handleSelectedRange} />
+      <SideBar />
       <RecipesGrid recipes={recipes} />
     </>
   );

@@ -1,23 +1,20 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import styles from "./SideBar.module.scss";
-import { useNavigate } from "react-router";
 
-interface Props {
-  handleRange: (range: number) => void;
-}
-
-export default function SideBar({ handleRange }: Props) {
-  const [minutes, setMinutes] = useState(75);
+export default function SideBar() {
+  const [minutes, setMinutes] = useState("75");
   const [searchQuery, setSearchQuery] = useState("");
-
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSearch = (query: string) => {
-    if (query === "") {
-      navigate("/");
-    } else {
-      navigate(`?search=${query}`);
-    }
+    searchParams.set("search", query);
+    setSearchParams(searchParams);
+  };
+
+  const handleRange = (value: string) => {
+    searchParams.set("maxCookingTime", value);
+    setSearchParams(searchParams);
   };
 
   return (
@@ -68,7 +65,7 @@ export default function SideBar({ handleRange }: Props) {
               max="210"
               step="1"
               onChange={(e) => {
-                const value = Number(e.target.value);
+                const value = e.target.value;
                 setMinutes(value);
               }}
               onClickCapture={() => {
