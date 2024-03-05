@@ -13,7 +13,11 @@ export default function SideBar({ handleRange }: Props) {
   const navigate = useNavigate();
 
   const handleSearch = (query: string) => {
-    navigate(`?search=${query}`);
+    if (query === "") {
+      navigate("/");
+    } else {
+      navigate(`?search=${query}`);
+    }
   };
 
   return (
