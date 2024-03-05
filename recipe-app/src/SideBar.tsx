@@ -1,13 +1,20 @@
 import { useState } from "react";
 import styles from "./SideBar.module.scss";
+import { useNavigate } from "react-router";
 
 interface Props {
-  handleSearch: (query: FormDataEntryValue | null) => void;
   handleRange: (range: number) => void;
 }
 
-export default function SideBar({ handleSearch, handleRange }: Props) {
+export default function SideBar({ handleRange }: Props) {
   const [minutes, setMinutes] = useState(75);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSearch = (query: string) => {
+    navigate(`?search=${query}`);
+  };
 
   return (
     <menu className={styles.sideBar}>
@@ -15,16 +22,15 @@ export default function SideBar({ handleSearch, handleRange }: Props) {
         onSubmit={(e) => {
           e.preventDefault();
 
-          const formData = new FormData(e.currentTarget);
-          const query = formData.get("search-recipe");
-          handleSearch(query);
+          handleSearch(searchQuery);
         }}
       >
         <input
           className={styles.searchRecipe}
-          id="search-recipe"
           type="search"
-          name="search-recipe"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Enter your search"
         />
       </form>
       <ul className={styles.filters}>
