@@ -9,6 +9,7 @@ import styles from "./MainPage.module.scss";
 
 export function MainPage() {
   const [recipes, setRecipes] = useState(useLoaderData() as Recipe[]);
+  const [filteredRecipes, setFilteredRecipes] = useState(recipes);
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
@@ -17,7 +18,7 @@ export function MainPage() {
       const filteredRecipes = recipes.filter((recipe) =>
         recipe.title.toLowerCase().includes(query)
       );
-      setRecipes(filteredRecipes);
+      setFilteredRecipes(filteredRecipes);
     }
   }, [searchParams]);
   
@@ -27,7 +28,7 @@ export function MainPage() {
       const filteredRecipes = recipes.filter((recipe) =>
         recipe.readyInMinutes <= Number(value)
       );
-      setRecipes(filteredRecipes);
+      setFilteredRecipes(filteredRecipes);
     }
   }, [searchParams]);
 
@@ -35,7 +36,7 @@ export function MainPage() {
     <>
       <Header />
       <SideBar />
-      <RecipesGrid recipes={recipes} />
+      <RecipesGrid recipes={filteredRecipes} />
     </>
   );
 }
