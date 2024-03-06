@@ -9,14 +9,12 @@ export default function SideBar() {
 
   const handleSearch = (query: string) => {
     const newSearchParams = new URLSearchParams(searchParams);
-    console.log(newSearchParams);
     if (query === "") {
       newSearchParams.delete("search");
     } else {
       newSearchParams.set("search", query);
     }
     setSearchParams(newSearchParams);
-    console.log(newSearchParams);
   };
 
   const handleRange = (value: string) => {
