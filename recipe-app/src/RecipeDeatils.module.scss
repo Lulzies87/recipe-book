@@ -1,0 +1,19 @@
+.recipeDetails {
+    margin: 0 2.5rem;
+    
+    &__header {
+        text-decoration: underline;
+        color: #555;
+    }
+
+    &__summary {
+        font-size: 0.8rem;
+    }
+
+    &__image {
+        display: block;
+        margin: 0 auto;
+        border: 2px solid #555;
+        border-radius: 8px;
+    }
+}

@@ -6,6 +6,7 @@ import { Recipe } from "./Recipe.model";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import styles from "./MainPage.module.scss";
+import { RecipeDetails } from "./RecipeDetails";
 
 export function MainPage() {
   const recipes = useLoaderData() as Recipe[];
@@ -13,22 +14,26 @@ export function MainPage() {
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    const query = searchParams.get("search");
-    if (query) {
+    const searchInput = searchParams.get("search");
+    if (searchInput) {
       const filteredRecipes = recipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(query)
+        recipe.title.toLowerCase().includes(searchInput)
       );
       setFilteredRecipes(filteredRecipes);
     }
-  }, [searchParams]);
-  
-  useEffect(() => {
-    const value = searchParams.get("maxCookingTime");
-    if (value) {
-      const filteredRecipes = recipes.filter((recipe) =>
-        recipe.readyInMinutes <= Number(value)
+
+    const cookingTimeValue = searchParams.get("maxCookingTime");
+    if (cookingTimeValue) {
+      const filteredRecipes = recipes.filter(
+        (recipe) => recipe.readyInMinutes <= Number(cookingTimeValue)
       );
       setFilteredRecipes(filteredRecipes);
+    }
+
+    const chosenRecipeId = searchParams.get("recipe");
+    // const chosenRecipeId = "716311";
+    if (chosenRecipeId) {
+      // console.log(`Recipe ${chosenRecipeId} chosen!`);
     }
   }, [searchParams]);
 
@@ -36,7 +41,8 @@ export function MainPage() {
     <>
       <Header />
       <SideBar />
-      <RecipesGrid recipes={filteredRecipes} />
+      {/* <RecipesGrid recipes={filteredRecipes} /> */}
+      <RecipeDetails recipes={recipes} recipeId="716405" />
     </>
   );
 }
