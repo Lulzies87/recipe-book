@@ -3,4 +3,7 @@ export interface Recipe {
   title: string;
   image: string;
   readyInMinutes: number;
+  servings: number;
+  summary: string;
+  instructions: string;
 }

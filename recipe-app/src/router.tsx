@@ -24,15 +24,29 @@ export const router = createBrowserRouter([
               title: string;
               image: string;
               readyInMinutes: number;
+              servings: number;
+              summary: string;
+              instructions: string;
             }[];
           }>("/");
 
           const recipes: Recipe[] = response.data.recipes.map(
-            ({ id, title, image, readyInMinutes }) => ({
+            ({
               id,
               title,
               image,
               readyInMinutes,
+              servings,
+              summary,
+              instructions,
+            }) => ({
+              id,
+              title,
+              image,
+              readyInMinutes,
+              servings,
+              summary,
+              instructions,
             })
           );
 
