@@ -8,7 +8,7 @@ import { useSearchParams } from "react-router-dom";
 import styles from "./MainPage.module.scss";
 
 export function MainPage() {
-  const [recipes, setRecipes] = useState(useLoaderData() as Recipe[]);
+  const recipes = useLoaderData() as Recipe[];
   const [filteredRecipes, setFilteredRecipes] = useState(recipes);
   const [searchParams] = useSearchParams();
 
