@@ -8,13 +8,27 @@ export default function SideBar() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSearch = (query: string) => {
-    searchParams.set("search", query);
-    setSearchParams(searchParams);
+    const newSearchParams = new URLSearchParams(searchParams);
+    console.log(newSearchParams);
+    if (query === "") {
+      newSearchParams.delete("search");
+    } else {
+      newSearchParams.set("search", query);
+    }
+    setSearchParams(newSearchParams);
+    console.log(newSearchParams);
   };
 
   const handleRange = (value: string) => {
-    searchParams.set("maxCookingTime", value);
-    setSearchParams(searchParams);
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set("maxCookingTime", value);
+    setSearchParams(newSearchParams);
+  };
+
+  const clearRangeFilter = () => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.delete("maxCookingTime");
+    setSearchParams(newSearchParams);
   };
 
   return (
@@ -57,7 +71,15 @@ export default function SideBar() {
           </details>
         </li>
         <li className={styles.filters__slider}>
-          <label htmlFor="duration">Cooking Time</label>
+          <div className={styles.filters__slider__heading}>
+            <label htmlFor="duration">Cooking Time</label>
+            <a
+              className={styles.filters__slider__heading__clearButton}
+              onClick={clearRangeFilter}
+            >
+              (clear)
+            </a>
+          </div>
           <div className={styles.filters__slider__items}>
             <input
               type="range"
@@ -72,7 +94,7 @@ export default function SideBar() {
                 handleRange(minutes);
               }}
             />
-            <span>{minutes}min</span>
+            <span>({minutes}min)</span>
           </div>
         </li>
       </ul>

@@ -41,18 +41,27 @@
     }
 
     &__slider {
+
         label {
             display: block;
-        }
-
-        span {
-            font-size: 0.6rem;
         }
 
         &__items {
             display: flex;
             gap: 0.2rem;
-            justify-content: center;
+            font-size: 0.6rem;
+        }
+
+        &__heading {
+            display: flex;
+            align-items: center;
+
+            &__clearButton {
+                margin-left: 0.3rem;
+                font-size: 0.6rem;
+                text-decoration: none;
+                cursor: pointer;
+            }
         }
     }
 }
