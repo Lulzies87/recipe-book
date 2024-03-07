@@ -1,19 +1,31 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import styles from "./SideBar.module.scss";
-import { useNavigate } from "react-router";
 
-interface Props {
-  handleRange: (range: number) => void;
-}
-
-export default function SideBar({ handleRange }: Props) {
-  const [minutes, setMinutes] = useState(75);
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const navigate = useNavigate();
+export default function SideBar() {
+  const [minutes, setMinutes] = useState("75");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSearch = (query: string) => {
-    navigate(`?search=${query}`);
+    const newSearchParams = new URLSearchParams(searchParams);
+    if (query === "") {
+      newSearchParams.delete("search");
+    } else {
+      newSearchParams.set("search", query);
+    }
+    setSearchParams(newSearchParams);
+  };
+
+  const handleRange = (value: string) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set("maxCookingTime", value);
+    setSearchParams(newSearchParams);
+  };
+
+  const clearRangeFilter = () => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.delete("maxCookingTime");
+    setSearchParams(newSearchParams);
   };
 
   return (
@@ -22,15 +34,17 @@ export default function SideBar({ handleRange }: Props) {
         onSubmit={(e) => {
           e.preventDefault();
 
+          const formData = new FormData(e.currentTarget);
+          const searchInput = formData.get("searchInput");
+          const searchQuery = searchInput!.toString();
           handleSearch(searchQuery);
         }}
       >
         <input
           className={styles.searchRecipe}
           type="search"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Enter your search"
+          name="searchInput"
         />
       </form>
       <ul className={styles.filters}>
@@ -56,7 +70,15 @@ export default function SideBar({ handleRange }: Props) {
           </details>
         </li>
         <li className={styles.filters__slider}>
-          <label htmlFor="duration">Cooking Time</label>
+          <div className={styles.filters__slider__heading}>
+            <label htmlFor="duration">Cooking Time</label>
+            <a
+              className={styles.filters__slider__heading__clearButton}
+              onClick={clearRangeFilter}
+            >
+              (clear)
+            </a>
+          </div>
           <div className={styles.filters__slider__items}>
             <input
               type="range"
@@ -64,14 +86,14 @@ export default function SideBar({ handleRange }: Props) {
               max="210"
               step="1"
               onChange={(e) => {
-                const value = Number(e.target.value);
+                const value = e.target.value;
                 setMinutes(value);
               }}
               onClickCapture={() => {
                 handleRange(minutes);
               }}
             />
-            <span>{minutes}min</span>
+            <span>({minutes}min)</span>
           </div>
         </li>
       </ul>

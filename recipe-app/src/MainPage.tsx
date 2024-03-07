@@ -1,43 +1,48 @@
 import { useLoaderData } from "react-router";
 import { Header } from "./Header";
 import SideBar from "./SideBar";
-import styles from "./MainPage.module.scss";
 import { RecipesGrid } from "./RecipesGrid";
 import { Recipe } from "./Recipe.model";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useSearchParams } from "react-router-dom";
+import { RecipeDetails } from "./RecipeDetails";
+import styles from "./MainPage.module.scss";
 
 export function MainPage() {
-  const [recipes, setRecipes] = useState(useLoaderData() as Recipe[]);
+  const recipes = useLoaderData() as Recipe[];
+  const [filteredRecipes, setFilteredRecipes] = useState(recipes);
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    const query = searchParams.get("search");
-    if (query) {
+    const searchInput = searchParams.get("search");
+    if (searchInput) {
       const filteredRecipes = recipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(query)
+        recipe.title.toLowerCase().includes(searchInput)
       );
-      setRecipes(filteredRecipes);
+      setFilteredRecipes(filteredRecipes);
+    }
+
+    const cookingTimeValue = searchParams.get("maxCookingTime");
+    if (cookingTimeValue) {
+      const filteredRecipes = recipes.filter(
+        (recipe) => recipe.readyInMinutes <= Number(cookingTimeValue)
+      );
+      setFilteredRecipes(filteredRecipes);
     }
   }, [searchParams]);
-
-  const handleSelectedRange = async (range: number) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:3000/maxCookingTime/${range}`
-      );
-      setRecipes(response.data.results);
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   return (
     <>
       <Header />
-      <SideBar handleRange={handleSelectedRange} />
-      <RecipesGrid recipes={recipes} />
+      <SideBar />
+      {searchParams.get("recipe") ? (
+        <RecipeDetails
+          recipes={filteredRecipes}
+          recipeId={searchParams.get("recipe")!.toString()}
+        />
+      ) : (
+        <RecipesGrid recipes={filteredRecipes} />
+      )}
     </>
   );
 }
