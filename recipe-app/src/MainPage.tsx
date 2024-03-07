@@ -5,8 +5,8 @@ import { RecipesGrid } from "./RecipesGrid";
 import { Recipe } from "./Recipe.model";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import styles from "./MainPage.module.scss";
 import { RecipeDetails } from "./RecipeDetails";
+import styles from "./MainPage.module.scss";
 
 export function MainPage() {
   const recipes = useLoaderData() as Recipe[];
@@ -29,20 +29,20 @@ export function MainPage() {
       );
       setFilteredRecipes(filteredRecipes);
     }
-
-    const chosenRecipeId = searchParams.get("recipe");
-    // const chosenRecipeId = "716311";
-    if (chosenRecipeId) {
-      // console.log(`Recipe ${chosenRecipeId} chosen!`);
-    }
   }, [searchParams]);
 
   return (
     <>
       <Header />
       <SideBar />
-      {/* <RecipesGrid recipes={filteredRecipes} /> */}
-      <RecipeDetails recipes={recipes} recipeId="716405" />
+      {searchParams.get("recipe") ? (
+        <RecipeDetails
+          recipes={filteredRecipes}
+          recipeId={searchParams.get("recipe")!.toString()}
+        />
+      ) : (
+        <RecipesGrid recipes={filteredRecipes} />
+      )}
     </>
   );
 }
