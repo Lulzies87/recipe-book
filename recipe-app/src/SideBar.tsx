@@ -4,7 +4,6 @@ import styles from "./SideBar.module.scss";
 
 export default function SideBar() {
   const [minutes, setMinutes] = useState("75");
-  const [searchQuery, setSearchQuery] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSearch = (query: string) => {
@@ -35,15 +34,17 @@ export default function SideBar() {
         onSubmit={(e) => {
           e.preventDefault();
 
+          const formData = new FormData(e.currentTarget);
+          const searchInput = formData.get("searchInput");
+          const searchQuery = searchInput!.toString();
           handleSearch(searchQuery);
         }}
       >
         <input
           className={styles.searchRecipe}
           type="search"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Enter your search"
+          name="searchInput"
         />
       </form>
       <ul className={styles.filters}>
