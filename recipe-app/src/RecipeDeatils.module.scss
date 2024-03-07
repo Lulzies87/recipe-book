@@ -1,19 +1,31 @@
+p {
+    font-size: 0.8rem;
+}
+
+h2 {
+    font-size: 1rem;
+    color: #555;
+}
+
 .recipeDetails {
-    margin: 0 2.5rem;
-    
+    width: 70ch;
+    margin: 0 auto;
+
     &__header {
         text-decoration: underline;
         color: #555;
     }
 
-    &__summary {
-        font-size: 0.8rem;
-    }
-
-    &__image {
-        display: block;
-        margin: 0 auto;
-        border: 2px solid #555;
+    &__statsContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        border: 1px solid #dddddd;
         border-radius: 8px;
+        margin: 1rem auto;
+        max-width: 800px;
+        padding: 0.6rem;
     }
 }
